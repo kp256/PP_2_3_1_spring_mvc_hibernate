@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>main</title>
+    <title>All cars</title>
 </head>
 <body>
 <div>
@@ -11,9 +11,13 @@
 </div>
 <hr>
 <div>
-    <th:block th:each="msg : ${messages}">
-        <h1 th:text="${msg}"/>
-    </th:block>
+    <a href="/cars/new">create car</a>
 </div>
+
+<ul>
+    <li th:each="car : ${cars}">
+        <a th:href="@{/cars/{id}(id=${car.getId()})}" th:text="${car.getModel()}">model</a>
+    </li>
+</ul>
 </body>
 </html>

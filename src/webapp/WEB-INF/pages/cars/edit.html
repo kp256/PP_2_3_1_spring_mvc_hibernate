@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit car</title>
+</head>
+<body>
+<div>
+    <a href="/">main</a>
+    <a href="/cars">cars</a>
+</div>
+<hr>
+<div>
+    <h1>Create car</h1>
+    <form th:method="PATCH" th:action="@{/cars/{id}(id=${car.getId()})}" th:object="${car}">
+        <label for="model">Enter new model</label>
+        <input type="text" th:field="*{model}" id="model">
+        <br>
+        <input type="submit" value="Update car">
+    </form>
+</div>
+</body>
+</html>
