@@ -10,7 +10,6 @@ import web.model.Car;
 @Controller
 @RequestMapping("/cars")
 public class CarController {
-
     private final CarDAO carDAO;
 
     @Autowired
@@ -18,23 +17,10 @@ public class CarController {
         this.carDAO = carDAO;
     }
 
-//    @GetMapping()
-//    public String printCars(@RequestParam(value = "count", required = false) String count, ModelMap model) {
-//        ArrayList<String> msg = new ArrayList<>();
-//
-//        msg.add("Cars page");
-//        if (count != null) {
-//            msg.add("You are requesting " + count + " car(s).");
-//        }
-//
-//        model.addAttribute("msg", msg);
-//
-//        return "cars/cars";
-//    }
-
     @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("cars", carDAO.cars());
+    public String index(@RequestParam(value = "count", required = false, defaultValue = "5") Integer count, Model model) {
+        model.addAttribute("cars", carDAO.cars(count));
+        model.addAttribute("count", count);
         return "cars/cars";
     }
 
@@ -50,7 +36,7 @@ public class CarController {
     }
 
     @PostMapping()
-    public String createCar(@ModelAttribute("car") Car car, Model model) {
+    public String createCar(@ModelAttribute("car") Car car) {
         carDAO.save(car);
         return "redirect:/cars";
     }

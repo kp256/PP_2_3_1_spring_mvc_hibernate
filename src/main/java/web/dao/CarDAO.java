@@ -21,15 +21,15 @@ public class CarDAO {
         cars.add(new Car(++CAR_ID, "UAZ"));
     }
 
-    public List<Car> cars() {
+    public List<Car> cars(Integer count) {
+        if (count < 5 && count > 0) {
+            return cars.subList(0, count);
+        }
         return cars;
     }
 
     public Car get(int id) {
-        return cars.stream()
-                .filter(car -> car.getId() == id)
-                .findFirst()
-                .orElse(null);
+        return cars.stream().filter(car -> car.getId() == id).findFirst().orElse(null);
     }
 
     public void save(Car car) {

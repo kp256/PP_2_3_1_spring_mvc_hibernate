@@ -13,7 +13,11 @@
 <div>
     <a href="/cars/new">create car</a>
 </div>
-
+<form th:action="@{/cars}" method="get">
+    <label for="count">Count: </label>
+    <input type="number" id="count" name="count" min="1" th:value="${count}"> <!-- Используем count из модели -->
+    <button type="submit">Ok</button>
+</form>
 <ul>
     <li th:each="car : ${cars}">
         <a th:href="@{/cars/{id}(id=${car.getId()})}" th:text="${car.getModel()}">model</a>
