@@ -15,6 +15,12 @@
     <form th:action="@{/users}" th:method="POST" th:object="${user}">
         <label for="name">Enter name</label>
         <input id="name" th:field="*{name}" type="text">
+
+        <label for="surname">Enter surname</label>
+        <input id="surname" th:field="*{surname}" type="text">
+
+        <label for="email">Enter email</label>
+        <input id="email" th:field="*{email}" type="text">
         <br>
         <input type="submit" value="Create user">
     </form>

@@ -1,6 +1,7 @@
 package web.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import web.dao.UserDAO;
 import web.model.User;
 
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     private final UserDAO userDAO;
 
     public UserServiceImpl(UserDAO userDAO) {
@@ -15,32 +17,43 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
+    public List<User> getUsers() {
+        return userDAO.getUsers();
+    }
+
+    @Override
+    @Transactional
     public List<User> getUsersByCount(int count) {
-        if (count > userDAO.getAllUsers().size()) {
-            return userDAO.getAllUsers();
+        if (count > userDAO.getUsers().size()) {
+            return userDAO.getUsers();
         } else {
-            return userDAO.getAllUsers().subList(0, count);
+            return userDAO.getUsers().subList(0, count);
         }
     }
 
-    public List<User> getAllUsers() {
-        return userDAO.getAllUsers();
-    }
-
+    @Override
+    @Transactional
     public User getUserById(int id) {
-        return userDAO.get(id);
+        return userDAO.getUserById(id);
     }
 
+    @Override
+    @Transactional
     public void saveUser(User user) {
-        userDAO.save(user);
+        userDAO.saveUser(user);
     }
 
+    @Override
+    @Transactional
     public void updateUser(int id, User user) {
-        userDAO.update(id, user);
+        userDAO.updateUser(id, user);
     }
 
+    @Override
+    @Transactional
     public void deleteUserById(int id) {
-        userDAO.delete(id);
+        userDAO.deleteUserById(id);
     }
 
 }

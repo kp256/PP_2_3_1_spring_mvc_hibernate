@@ -12,22 +12,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import web.model.User;
-import web.service.UserServiceImpl;
+import web.service.UserService;
 
 
 @Controller
 @RequestMapping("/users")
 public class UserController {
-    private final UserServiceImpl userService;
-
     @Autowired
-    public UserController(UserServiceImpl userService) {
-        this.userService = userService;
-    }
+    private UserService userService;
+
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("users", userService.getUsers());
         return "users/users";
     }
 

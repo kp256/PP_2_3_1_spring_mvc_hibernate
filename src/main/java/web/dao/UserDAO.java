@@ -1,34 +1,17 @@
 package web.dao;
 
-import org.springframework.stereotype.Repository;
 import web.model.User;
 
 import java.util.List;
 
-@Repository
-public class UserDAO {
-    private List<User> users;
+public interface UserDAO {
+    List<User> getUsers();
 
-    public List<User> getAllUsers() {
-        return users;
-    }
+    User getUserById(int id);
 
-    public User get(int id) {
-        return users.stream().filter(user -> user.getId() == id).findFirst().orElse(null);
-    }
+    void saveUser(User user);
 
-    public void save(User user) {
-        users.add(user);
-    }
+    void updateUser(int id, User user);
 
-    public void update(int id, User user) {
-        User old = get(id);
-        old.setName(user.getName());
-        old.setSurname(user.getSurname());
-        old.setEmail(user.getEmail());
-    }
-
-    public void delete(int id) {
-        users.removeIf(user -> user.getId() == id);
-    }
+    void deleteUserById(int id);
 }

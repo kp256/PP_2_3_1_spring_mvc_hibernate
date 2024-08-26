@@ -1,5 +1,7 @@
 package web.model;
 
+import org.hibernate.validator.constraints.Email;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,11 +16,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int id;
-    @Column
+
+    @Column(name = "name")
     private String name;
-    @Column
+
+    @Column(name = "surname")
     private String surname;
-    @Column
+
+    @Email
+    @Column(name = "email")
     private String email;
 
     public User() {

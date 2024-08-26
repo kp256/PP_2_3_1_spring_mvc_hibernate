@@ -10,18 +10,27 @@
     <a href="/users">users</a>
 </div>
 <hr>
-<div>
-    <a href="/users/new">create user</a>
+
+
+<hr>
+<div th:each="user : ${users}">
+    <a th:href="@{/users/{id}(id=${user.getId()})}"
+       th:text="${user.getName() + ' ' + user.getSurname()}">user</a>
+    <p th:text="${'ID: ' + user.getId() + '. email: ' + user.getEmail()}"></p>
+    <hr>
 </div>
+
+
 <form method="get" th:action="@{/users}">
-    <label for="count">Count: </label>
-    <input type="number" id="count" name="count" min="1" th:value="${count}">
+    <label for="count">Count User on page: </label>
+    <input id="count" min="1" name="count" th:value="${count}" type="number">
     <button type="submit">Ok</button>
 </form>
-<ul>
-    <li th:each="user : ${users}">
-        <a th:href="@{/users/{id}(id=${user.getId()})}" th:text="${user.getName()}">user</a>
-    </li>
-</ul>
+
+<hr>
+
+<form action="/users/new" target="_blank">
+    <button>Create NEW User</button>
+</form>
 </body>
 </html>
