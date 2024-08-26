@@ -1,12 +1,12 @@
 package web.dao;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import web.model.Car;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Repository
 public class CarDAO {
     private static int CAR_ID;
     private List<Car> cars;
@@ -21,10 +21,7 @@ public class CarDAO {
         cars.add(new Car(++CAR_ID, "UAZ"));
     }
 
-    public List<Car> cars(Integer count) {
-        if (count < 5 && count > 0) {
-            return cars.subList(0, count);
-        }
+    public List<Car> getAllCars() {
         return cars;
     }
 

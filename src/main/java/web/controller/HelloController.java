@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HelloController {
 
-	@GetMapping(value = "/")
-	public String printWelcome(Model model) {
-		model.addAttribute("messages", "Hello page");
-		return "index";
-	}
-	
+    @GetMapping(value = "/")
+    public String printWelcome(Model model) {
+        model.addAttribute("messages", "Hello page");
+        return "index";
+    }
+
 }
