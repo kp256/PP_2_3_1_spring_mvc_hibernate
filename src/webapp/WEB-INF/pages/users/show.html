@@ -2,25 +2,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User</title>
+    <title>Show user</title>
 </head>
 <body>
 <div>
-    <a href="/">main</a>
     <a href="/users">users</a>
 </div>
 <hr>
 <div>
-    <h1 th:text="${user.getName()}">VALUE</h1>
-    <span>User ID: </span>
-    <span th:text="${user.getId()}">VALUE</span>
+    <h1>Show user</h1>
+    <h1 th:text="${user.getName()} + ' ' + ${user.getSurname()}">VALUE</h1>
+    <span th:text="'User ID: ' + ${user.getId()}"/>
+    <span th:text="'User email: ' + ${user.getEmail()}"/>
 </div>
 <div>
-    <a th:href="@{/users/{id}/edit(id=${user.getId()})}">Edit</a>
-    <form th:action="@{/users/{id}(id=${user.getId()})}" th:method="DELETE">
-        <input type="submit" value="Delete"/>
-    </form>
+    <a th:href="@{/users/edit(id=${user.getId()})}">
+        <button type="submit">
+            EDIT
+        </button>
+    </a>
 
+    <form th:action="@{/users/delete(id=${user.getId()})}" th:method="POST">
+        <button type="submit">
+            DELETE
+        </button>
+    </form>
 </div>
 </body>
 </html>

@@ -12,23 +12,24 @@ import java.util.List;
 @Repository
 public class UserDAOImpl implements UserDAO {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
+    @Autowired
+    public UserDAOImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public List<User> getUsers() {
         Session session = sessionFactory.getCurrentSession();
         Query<User> query = session.createQuery("from User", User.class);
-        List<User> users = query.getResultList();
-        return users;
+        return query.getResultList();
     }
 
     @Override
     public User getUserById(int id) {
         Session session = sessionFactory.getCurrentSession();
-        User user = session.get(User.class, id);
-        return user;
+        return session.get(User.class, id);
     }
 
     @Override
@@ -40,7 +41,6 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void updateUser(int id, User user) {
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
         User old = getUserById(id);
         old.setName(user.getName());
         old.setSurname(user.getSurname());

@@ -17,7 +17,7 @@ import java.util.Properties;
 
 @Configuration
 @PropertySource("classpath:hibernate.properties")
-@EnableTransactionManagement //(proxyTargetClass = true)
+@EnableTransactionManagement//(proxyTargetClass = true)
 //@EnableAspectJAutoProxy(proxyTargetClass = true)
 @ComponentScan(value = "web")
 public class HibernateConfig {

@@ -1,7 +1,5 @@
 package web.model;
 
-import org.hibernate.validator.constraints.Email;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +21,6 @@ public class User {
     @Column(name = "surname")
     private String surname;
 
-    @Email
     @Column(name = "email")
     private String email;
 

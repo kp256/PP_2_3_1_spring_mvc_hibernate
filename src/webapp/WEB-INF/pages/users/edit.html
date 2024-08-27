@@ -6,17 +6,22 @@
 </head>
 <body>
 <div>
-    <a href="/">main</a>
     <a href="/users">users</a>
 </div>
 <hr>
 <div>
-    <h1>Create user</h1>
-    <form th:action="@{/users/{id}(id=${user.getId()})}" th:method="PATCH" th:object="${user}">
+    <h1>Edit user</h1>
+    <form th:action="@{/users/update(id=${user.getId()})}" th:method="POST" th:object="${user}">
         <label for="name">Enter new name</label>
         <input id="name" th:field="*{name}" type="text">
+
+        <label for="surname">Enter new surname</label>
+        <input id="surname" th:field="*{surname}" type="text">
+
+        <label for="email">Enter new email</label>
+        <input id="email" th:field="*{email}" type="text">
         <br>
-        <input type="submit" value="Update user">
+        <input type="submit" value="UPDATE_USER">
     </form>
 </div>
 </body>
