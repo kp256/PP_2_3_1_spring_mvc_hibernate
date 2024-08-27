@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface UserService {
     List<User> getUsers();
+
     List<User> getUsersByCount(int count);
 
     User getUserById(int id);

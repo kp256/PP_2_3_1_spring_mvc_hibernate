@@ -3,31 +3,39 @@ package web.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import web.dao.UserDAO;
 import web.model.User;
+import web.repositories.UserRepository;
 
 import java.util.List;
 
+@Transactional(readOnly = true)
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserDAO userDAO;
+//    private final UserDAO userDAO;
+//    private final UserRepository userRepository;
+//
+//    @Autowired
+//    public UserServiceImpl(UserDAO userDAO, UserRepository userRepository) {
+//        this.userDAO = userDAO;
+//        this.userRepository = userRepository;
+//    }
+
+    private final UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(UserDAO userDAO) {
-        this.userDAO = userDAO;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
-    @Transactional
     public List<User> getUsers() {
-        return userDAO.getUsers();
+        return userRepository.findAll();
     }
 
     @Override
-    @Transactional
     public List<User> getUsersByCount(int count) {
-        List<User> users = userDAO.getUsers();
+        List<User> users = userRepository.findAll();
         if (count > users.size()) {
             return users;
         } else {
@@ -36,27 +44,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public User getUserById(int id) {
-        return userDAO.getUserById(id);
+        return userRepository.findById(id).orElse(null);
     }
 
     @Override
     @Transactional
     public void saveUser(User user) {
-        userDAO.saveUser(user);
+        userRepository.save(user);
     }
 
     @Override
     @Transactional
     public void updateUser(int id, User user) {
-        userDAO.updateUser(id, user);
+        user.setId(id);
+        userRepository.save(user);
     }
 
     @Override
     @Transactional
     public void deleteUserById(int id) {
-        userDAO.deleteUserById(id);
+        userRepository.deleteById(id);
     }
 
 }

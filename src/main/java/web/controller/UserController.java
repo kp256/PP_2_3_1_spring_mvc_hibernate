@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import web.model.User;
 import web.service.UserService;
 
-
 @Controller
 public class UserController {
     private final UserService userService;
@@ -28,25 +27,25 @@ public class UserController {
     @GetMapping("/users")
     public String users(Model model) {
         model.addAttribute("users", userService.getUsers());
-        return "users/users";
+        return "/users";
     }
 
     @GetMapping(value = "/users", params = "count")
     public String index(@RequestParam(value = "count", required = false) Integer count, Model model) {
         model.addAttribute("users", userService.getUsersByCount(count));
         model.addAttribute("count", count);
-        return "users/users";
+        return "/users";
     }
 
     @GetMapping(value = "/users/show", params = "id")
     public String showUser(@RequestParam("id") int id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
-        return "users/show";
+        return "/show";
     }
 
     @GetMapping("/users/new")
     public String newUser(@ModelAttribute("user") User user) {
-        return "users/new";
+        return "/new";
     }
 
     @PostMapping("/users")
@@ -58,7 +57,7 @@ public class UserController {
     @GetMapping(value = "/users/edit", params = "id")
     public String editUser(Model model, @RequestParam("id") int id) {
         model.addAttribute("user", userService.getUserById(id));
-        return "users/edit";
+        return "/edit";
     }
 
     @PostMapping(value = "/users/update", params = "id")
