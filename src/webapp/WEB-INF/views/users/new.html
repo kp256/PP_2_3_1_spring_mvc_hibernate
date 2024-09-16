@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>New user</title>
+    <meta charset="UTF-8">
+    <title>New User</title>
 </head>
 <body>
 <div>
-    <a href="/users">users</a>
+    <a href="/users">Users</a>
 </div>
 <hr>
 <div>
-    <h1>New user</h1>
+    <h1>New User</h1>
     <form th:action="@{/users}" th:method="POST" th:object="${user}">
+        <div th:if="${#fields.hasErrors('name')}" style="color: red;">
+            <p th:errors="*{name}">Name Error</p>
+        </div>
         <label for="name">Enter name</label>
         <input id="name" th:field="*{name}" type="text">
 
+        <div th:if="${#fields.hasErrors('surname')}" style="color: red;">
+            <p th:errors="*{surname}">Surname Error</p>
+        </div>
         <label for="surname">Enter surname</label>
         <input id="surname" th:field="*{surname}" type="text">
 
+        <div th:if="${#fields.hasErrors('email')}" style="color: red;">
+            <p th:errors="*{email}">Email Error</p>
+        </div>
         <label for="email">Enter email</label>
         <input id="email" th:field="*{email}" type="text">
         <br>

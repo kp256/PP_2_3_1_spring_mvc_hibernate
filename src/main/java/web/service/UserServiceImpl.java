@@ -12,15 +12,6 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-//    private final UserDAO userDAO;
-//    private final UserRepository userRepository;
-//
-//    @Autowired
-//    public UserServiceImpl(UserDAO userDAO, UserRepository userRepository) {
-//        this.userDAO = userDAO;
-//        this.userRepository = userRepository;
-//    }
-
     private final UserRepository userRepository;
 
     @Autowired
